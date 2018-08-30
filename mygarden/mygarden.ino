@@ -89,27 +89,27 @@ int connection_to_server_success; // if this is low, it tells the server that it
 // the setup function runs once when you press reset or power the board
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
+  Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
-  float new_air_temp_measurement=-666;
-  float new_humidity_measurement=-666;
-  float new_tvoc_measurement=-666;
-  float new_co2_measurement=-666;
-  float new_sln_temp_measurement=-666;
-  float new_tds_measurement=-666;
-  float new_do_measurement=-666;
-  float new_orp_measurement=-666;
-  float new_ph_measurement=-666;
-  float new_canopy_measurement=-666;
-  float new_light_height_measurement=-666;
-  float new_reservoir_one_status=-666;
-  float new_reservoir_two_status=-666;
-  float new_reservoir_three_status=-666;
-  float new_reservoir_four_status=-666;
-  float new_reservoir_five_status=-666;
-  float new_reservoir_six_status=-666;
-  float new_reservoir_seven_status=-666;
-  float new_reservoir_eight_status=-666;
-
+  new_air_temp_measurement=-666;
+  new_humidity_measurement=-666;
+  new_tvoc_measurement=-666;
+  new_co2_measurement=-666;
+  new_sln_temp_measurement=-666;
+  new_tds_measurement=-666;
+  new_do_measurement=-666;
+  new_orp_measurement=-666;
+  new_ph_measurement=-666;
+  new_canopy_measurement=-666;
+  new_light_height_measurement=-666;
+  new_reservoir_one_status=-666;
+  new_reservoir_two_status=-666;
+  new_reservoir_three_status=-666;
+  new_reservoir_four_status=-666;
+  new_reservoir_five_status=-666;
+  new_reservoir_six_status=-666;
+  new_reservoir_seven_status=-666;
+  new_reservoir_eight_status=-666;
 
   
 }
@@ -120,8 +120,8 @@ void loop() {
 
   // let's wrangle up a data point to send to the server. 
   
-
-  
+  delay(1000);
+  new_batch_of_test_data();
   string_to_be_sent_to_server = less_than + new_air_temp_measurement;
   string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_humidity_measurement;
   string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_tvoc_measurement;
@@ -143,13 +143,33 @@ void loop() {
   string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_eight_status;
   string_to_be_sent_to_server = string_to_be_sent_to_server + greater_than;  
 
+  Serial.println(string_to_be_sent_to_server);
+  Serial.println("tee hee hee");
+  
+}
 
 
- 
-
-
-
-
+void new_batch_of_test_data(){
+  new_air_temp_measurement=random(100);
+  new_humidity_measurement=random(100);
+  new_tvoc_measurement=random(100);
+  new_co2_measurement=random(100);
+  new_sln_temp_measurement=random(100);
+  new_tds_measurement=random(100);
+  new_do_measurement=random(100);
+  new_orp_measurement=random(100);
+  new_ph_measurement=random(100);
+  new_canopy_measurement=random(100);
+  new_light_height_measurement=random(100);
+  new_reservoir_one_status=random(100);
+  new_reservoir_two_status=random(100);
+  new_reservoir_three_status=random(100);
+  new_reservoir_four_status=random(100);
+  new_reservoir_five_status=random(100);
+  new_reservoir_six_status=random(100);
+  new_reservoir_seven_status=random(100);
+  new_reservoir_eight_status=random(100);
 
   
+
 }
