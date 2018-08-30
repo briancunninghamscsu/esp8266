@@ -1,26 +1,17 @@
 /*
-  Blink
-
-  Turns an LED on for one second, then off for one second, repeatedly.
-
-  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
-  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
-  the correct LED pin independent of which board is used.
-  If you want to know what pin the on-board LED is connected to on your Arduino
-  model, check the Technical Specs of your board at:
-  https://www.arduino.cc/en/Main/Products
-
-  modified 8 May 2014
-  by Scott Fitzgerald
-  modified 2 Sep 2016
-  by Arturo Guadalupi
-  modified 8 Sep 2016
-  by Colby Newman
-
-  This example code is in the public domain.
-
-  http://www.arduino.cc/en/Tutorial/Blink
+  Brian Cunningham & Dylan Kohl
+  Senior Design 2018
+  
 */
+
+
+#include <ESP8266WiFi.h>
+
+const char* ssid     = "monkey";
+const char* password = "thering17";
+
+const char* host = "192.168.1.12";
+
 
 
 // these indicate that the measurements recieved by this unit are new, to avoid duplicates being sent to the server
@@ -88,9 +79,27 @@ int connection_to_server_success; // if this is low, it tells the server that it
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
+  
+  
   Serial.begin(115200);
-  pinMode(LED_BUILTIN, OUTPUT);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");  
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  Serial.print("Netmask: ");
+  Serial.println(WiFi.subnetMask());
+  Serial.print("Gateway: ");
+  Serial.println(WiFi.gatewayIP());
+
+  
+  
+  
+  //pinMode(LED_BUILTIN, OUTPUT);
   new_air_temp_measurement=-666;
   new_humidity_measurement=-666;
   new_tvoc_measurement=-666;
@@ -117,6 +126,41 @@ void setup() {
 
 void loop() {
   
+  //delay(5000);
+  
+
+  //Serial.print("connecting to ");
+  //Serial.println(host);
+  
+  // Use WiFiClient class to create TCP connections
+  WiFiClient client;
+  const int httpPort = 80;
+  if (!client.connect(host, httpPort)) {
+    Serial.println("connection failed");
+    return;
+  }
+  
+  // We now create a URI for the request
+  //String url = "/testwifi/index.html";
+  String url = "/mygarden/api.php?whatiwant=push_data";
+  
+  //Serial.print("Requesting URL: ");
+  //Serial.println(url);
+  
+  // This will send the request to the server
+  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+               "Host: " + host + "\r\n" + 
+               "Connection: close\r\n\r\n");
+  delay(500);
+  
+  // Read all the lines of the reply from server and print them to Serial
+  while(client.available()){
+    String line = client.readStringUntil('\r');
+    Serial.print(line);
+  }
+  
+  //Serial.println();
+  //Serial.println("closing connection");
 
   // let's wrangle up a data point to send to the server. 
   
@@ -143,8 +187,8 @@ void loop() {
   string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_eight_status;
   string_to_be_sent_to_server = string_to_be_sent_to_server + greater_than;  
 
-  Serial.println(string_to_be_sent_to_server);
-  Serial.println("tee hee hee");
+  //Serial.println(string_to_be_sent_to_server);
+  //Serial.println("tee hee hee");
   
 }
 
