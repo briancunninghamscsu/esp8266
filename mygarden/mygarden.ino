@@ -25,7 +25,6 @@
 
 // these indicate that the measurements recieved by this unit are new, to avoid duplicates being sent to the server
 // if true, there's a new measurement that needs to be sent to the server. 
-
 int new_air_temp_measurement_flag;
 int new_humidity_measurement_flag;
 int new_tvoc_measurement_flag;
@@ -50,26 +49,32 @@ int new_reservoir_eight_status_flag;
 
 
 // these are the actual values of the newest measurements
-int new_air_temp_measurement;
-int new_humidity_measurement;
-int new_tvoc_measurement;
-int new_co2_measurement;
-int new_sln_temp_measurement;
-int new_tds_measurement;
-int new_do_measurement;
-int new_orp_measurement;
-int new_ph_measurement;
-int new_canopy_measurement;
-int new_light_height_measurement;
-int new_reservoir_one_status;
-int new_reservoir_two_status;
-int new_reservoir_three_status;
-int new_reservoir_four_status;
-int new_reservoir_five_status;
-int new_reservoir_six_status;
-int new_reservoir_seven_status;
-int new_reservoir_eight_status;
+float new_air_temp_measurement;
+float new_humidity_measurement;
+float new_tvoc_measurement;
+float new_co2_measurement;
+float new_sln_temp_measurement;
+float new_tds_measurement;
+float new_do_measurement;
+float new_orp_measurement;
+float new_ph_measurement;
+float new_canopy_measurement;
+float new_light_height_measurement;
+float new_reservoir_one_status;
+float new_reservoir_two_status;
+float new_reservoir_three_status;
+float new_reservoir_four_status;
+float new_reservoir_five_status;
+float new_reservoir_six_status;
+float new_reservoir_seven_status;
+float new_reservoir_eight_status;
 
+String less_than = "< ";
+String greater_than= " >";
+String space = " ";
+
+//String date_string;
+//String date_time; when the data arrives at the server, the server will timestamp it.
 
 
 // for concatenating the data payloud
@@ -85,27 +90,66 @@ int connection_to_server_success; // if this is low, it tells the server that it
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
+  float new_air_temp_measurement=-666;
+  float new_humidity_measurement=-666;
+  float new_tvoc_measurement=-666;
+  float new_co2_measurement=-666;
+  float new_sln_temp_measurement=-666;
+  float new_tds_measurement=-666;
+  float new_do_measurement=-666;
+  float new_orp_measurement=-666;
+  float new_ph_measurement=-666;
+  float new_canopy_measurement=-666;
+  float new_light_height_measurement=-666;
+  float new_reservoir_one_status=-666;
+  float new_reservoir_two_status=-666;
+  float new_reservoir_three_status=-666;
+  float new_reservoir_four_status=-666;
+  float new_reservoir_five_status=-666;
+  float new_reservoir_six_status=-666;
+  float new_reservoir_seven_status=-666;
+  float new_reservoir_eight_status=-666;
+
+
+  
 }
 
-// the loop function runs over and over again forever
+
 void loop() {
-  //digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  //delay(1000);                       // wait for a second
-  //digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
+  
 
   // let's wrangle up a data point to send to the server. 
-  string_to_be_sent_to_server = "<";
-  Serial.println(string_to_be_sent_to_server);
+  
+
+  
+  string_to_be_sent_to_server = less_than + new_air_temp_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_humidity_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_tvoc_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_co2_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_sln_temp_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_tds_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_do_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_orp_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_ph_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_canopy_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_light_height_measurement;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_one_status;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_two_status;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_three_status;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_four_status;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_five_status;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_six_status;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_seven_status;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + space +  new_reservoir_eight_status;
+  string_to_be_sent_to_server = string_to_be_sent_to_server + greater_than;  
 
 
 
-  // is there a new air temperature measurement?
-  if (new_air_temp_measurement_flag){
-  
-  
-  
-  }
+ 
+
+
+
+
 
   
 }
