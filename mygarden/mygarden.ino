@@ -59,6 +59,8 @@ float new_reservoir_five_status;
 float new_reservoir_six_status;
 float new_reservoir_seven_status;
 float new_reservoir_eight_status;
+float new_reservoir_nine_status;
+
 
 String less_than = "< ";
 String greater_than= " >";
@@ -111,15 +113,15 @@ void setup() {
   new_ph_measurement=-666;
   new_canopy_measurement=-666;
   new_light_height_measurement=-666;
-  new_reservoir_one_status=-666;
-  new_reservoir_two_status=-666;
-  new_reservoir_three_status=-666;
-  new_reservoir_four_status=-666;
-  new_reservoir_five_status=-666;
-  new_reservoir_six_status=-666;
-  new_reservoir_seven_status=-666;
-  new_reservoir_eight_status=-666;
-
+  new_reservoir_one_status=0;
+  new_reservoir_two_status=0;
+  new_reservoir_three_status=0;
+  new_reservoir_four_status=0;
+  new_reservoir_five_status=0;
+  new_reservoir_six_status=0;
+  new_reservoir_seven_status=0;
+  new_reservoir_eight_status=0;
+  new_reservoir_nine_status=0;
   
 }
 
@@ -185,7 +187,7 @@ void loop() {
   url = url + "&" + "new_reservoir_six_status=" + new_reservoir_six_status;
   url = url + "&" + "new_reservoir_seven_status=" + new_reservoir_seven_status;
   url = url + "&" + "new_reservoir_eight_status=" + new_reservoir_eight_status; 
-   
+  url = url + "&" + "new_reservoir_nine_status=" + new_reservoir_nine_status;  
 
   
  
@@ -232,18 +234,17 @@ void new_batch_of_test_data(){
   new_tds_measurement=random(100);
   new_do_measurement=random(100);
   new_orp_measurement=random(100);
-  new_ph_measurement=random(100);
+  new_ph_measurement=random(14);
   new_canopy_measurement=random(100);
   new_light_height_measurement=random(100);
-  new_reservoir_one_status=random(100);
-  new_reservoir_two_status=random(100);
-  new_reservoir_three_status=random(100);
-  new_reservoir_four_status=random(100);
-  new_reservoir_five_status=random(100);
-  new_reservoir_six_status=random(100);
-  new_reservoir_seven_status=random(100);
-  new_reservoir_eight_status=random(100);
-
-  
+  new_reservoir_one_status=random(2);
+  new_reservoir_two_status=random(2);
+  new_reservoir_three_status=random(2);
+  new_reservoir_four_status=random(2);
+  new_reservoir_five_status=random(2);
+  new_reservoir_six_status=random(2);
+  new_reservoir_seven_status=random(2);
+  new_reservoir_eight_status=random(2);
+  new_reservoir_nine_status=random(2);
 
 }
